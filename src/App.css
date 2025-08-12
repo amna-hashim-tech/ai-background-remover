@@ -1,38 +1,288 @@
-.App {
+/* Reset & basics */
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root, .app {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+}
+
+/* Header */
+.header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  background: linear-gradient(45deg, #fff, #e3f2fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin: 10px 0 0 0;
+  font-weight: 300;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Upload Section */
+.upload-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  cursor: pointer;
+  color: #666;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.upload-section:hover {
+  background-color: rgba(255,255,255,1);
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-text {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.upload-note {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+/* Error Message */
+.error-message {
+  max-width: 1200px;
+  margin: 20px auto;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #f44336;
+  padding: 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Action Button */
+.action-button-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.action-button {
+  background: linear-gradient(45deg, #89a7f0, #9a75c4);
+  color: white;
+  border: 2px solid #fff;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+  min-width: 250px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.action-button.processing {
+  background: linear-gradient(45deg, #999, #666);
+  cursor: not-allowed;
+  border-color: #ccc;
+  box-shadow: none;
+}
+
+.action-button:not(.processing):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 255, 255, 0.6);
+}
+
+.action-button:not(.processing):active {
+  transform: translateY(0);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+/* Images Grid */
+.images-grid {
+  max-width: 1200px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+  gap: 30px;
+}
+
+/* Individual Image Card */
+.image-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.section-title {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+  width: 100%;
+}
+
+.image-preview,
+.processed-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.processed-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 15px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Zoom on Hover */
+.zoom-on-hover {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+  border-radius: 12px;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.1);
+}
+
+/* Placeholder Text */
+.placeholder-text {
+  color: #999;
+  font-style: italic;
+}
+
+/* Background Replacement Controls */
+.background-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.background-controls label {
+  font-weight: 600;
+  color: #333;
+}
+
+.background-select,
+.color-picker,
+.image-url-input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.color-picker {
+  width: 100%;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.gradient-inputs {
+  display: flex;
+  gap: 4%;
+}
+
+.color-picker-half {
+  width: 48%;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+/* Download Button */
+.download-button {
+  background: linear-gradient(45deg, #4caf50, #45a049);
   color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(76, 175, 80, 0.5);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.download-button:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .images-grid {
+    grid-template-columns: 1fr;
+    margin: 20px 10px;
+    gap: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .upload-section {
+    padding: 30px 20px;
+    margin: 20px 10px;
+  }
+
+  .action-button-container {
+    margin: 10px 10px 20px 10px;
   }
 }
