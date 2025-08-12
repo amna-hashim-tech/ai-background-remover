@@ -396,30 +396,7 @@ function App() {
             </div>
           </div>
         )}
-
-        {/* Success Message */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.95)',
-          borderRadius: '20px',
-          padding: '30px',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
-          textAlign: 'center'
-        }}>
-          <h3 style={{ 
-            color: '#333', 
-            marginBottom: '15px',
-            fontSize: '1.5rem',
-            fontWeight: '600'
-          }}>
-            🎉 You Built Something Amazing!
-          </h3>
-          <p style={{ color: '#666', fontSize: '1rem', lineHeight: '1.6' }}>
-            This is a professional-grade AI application with real background removal, 
-            modern UI design, and production-ready features. Perfect for your portfolio!
-          </p>
-        </div>
+          
       </div>
 
       <style jsx>{`
